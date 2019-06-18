@@ -1,13 +1,11 @@
-<div id="chart">
-    <canvas id="myChart" width="300" height="300"></canvas>
+<div id="chart-test">
+    <canvas id="myChart1" width="300" height="300"></canvas>
+</div>
+<div id="chart-another-test">
+    <canvas id="myChart2" width="300" height="300"></canvas>
 </div>
 <div id="object-div" >
-    <table border=1>
-        <thead>
-            <th>#</th>
-            <th>nome</th>
-        </thead>
-        <tbody id="ap-test"></tbody>
-    </table>
+    <table id="ap-test" border=1></table>
 </div>
-<script>gen_chart()</script>
+<script>gen_chart('myChart1', meta_test)</script>
+<script>gen_chart('myChart2', meta_another_test)</script>

@@ -1,28 +1,5 @@
-function click_func(event, object) {
-    var curr = object[0]._index;
-    var params = {
-        group: curr,
-    }
-
-    $.post('type', params, function(type) {
-
-        $('#ap-test').html('');
-
-        $.each(type[0], function(key, value) {
-            var str = '<tr>';
-            str += '<td>'+value.id+'</td>';
-            str += '<td>'+value.name+'</td>';
-            str += '</tr>';
-
-            $('#ap-test').append(str);
-
-            console.log(str);
-        })
-    })
-}
-
-function gen_chart() {
-    var ctx = document.getElementById('myChart');
+function gen_chart(element, metadata) {
+    var ctx = document.getElementById(element);
     
     var myChart = new Chart(ctx, {
         type: 'doughnut',
@@ -48,7 +25,37 @@ function gen_chart() {
         options: { 
             rotation: Math.PI,
             circumference: Math.PI,
-            onClick: click_func
+            onClick: function(event, object) {
+                var curr = object[0]._index;
+                var params = {
+                    group: metadata.options[curr],
+                    table: metadata.table_name,
+                    column: metadata.group_column
+                }
+
+                $.post('type', params, function(type) {
+
+                    $('#ap-test').html('<table><thead>');
+                    $.each(metadata.human_attributes, function(key, value) {
+                        $('#ap-test').append('<th>' + value + '</th>');
+                    })
+                    $('#ap-test').append('</thead><tbody>');
+
+                    $.each(type[0], function(key, value) {
+                        var str = '<tr>';
+
+                        $.each(metadata.attributes, function(k, v) {
+                            str += '<td>' + value[v] + '</td>'
+                        })
+                        str += '</tr>';
+
+                        $('#ap-test').append(str);
+
+                    })
+
+                    $('#ap-test').append('</tbody></table>');
+                })
+            } //
         }
     });
 }

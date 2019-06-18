@@ -1,10 +1,17 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#chart {
+#chart-test {
     width: 400px;
     height: 400px;
     float: left;
+
+    margin-right: 25px;
+}
+#chart-another-test {
+    width: 400px;
+    height: 400px;
+    float: right;
 
     margin-right: 25px;
 }

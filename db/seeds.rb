@@ -7,16 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Rails.env.development?
-    5.times do
-        Test.create!(obj_type: 0, name: Faker::App.name)
+    (0..3).each do |i|
+        city = Faker::Address.city
+        5.times do
+            Test.create!(obj_type: i, name: Faker::App.name)
+            AnotherTest.create!(city: city, address: Faker::Address.street_name)
+        end
     end
-    5.times do
-        Test.create!(obj_type: 1, name: Faker::App.name)
-    end
-    5.times do
-        Test.create!(obj_type: 2, name: Faker::App.name)
-    end
-    5.times do
-        Test.create!(obj_type: 3, name: Faker::App.name)
-    end
+
 end

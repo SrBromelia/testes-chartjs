@@ -1,13 +1,27 @@
 class HomeController < ApplicationController
   def index
-    @tests = Test.all
   end
 
   def type
-    render json: Test.type(params[:group])
+    render json: table(table_param).type(params[:column], params[:group])
   end
 
   def groups
-    render json: Test.grouped(params[:column])
+    render json: table(table_param).grouped(params[:column])
+  end
+
+  private
+
+  def table_param
+    params[:table].to_sym
+  end
+
+  def table(dbtable)
+    case dbtable
+    when :test
+      Test
+    when :another_test
+      AnotherTest
+    end
   end
 end

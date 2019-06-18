@@ -1,14 +1,14 @@
-class Test < ApplicationRecord
+class AnotherTest < ApplicationRecord
     scope :type, -> (column,*ids) {
         ret = []
         ids.each do |id|
-            ret << Test.where(column => id)
+            ret << AnotherTest.where(column => id)
         end
 
         ret.reject {|list| list.empty? }
     }
 
     scope :grouped, -> (column) {
-        Test.group(column).count
+        AnotherTest.group(column).count
     }
 end
